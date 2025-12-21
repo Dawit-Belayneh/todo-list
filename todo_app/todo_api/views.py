@@ -53,17 +53,20 @@ class LoginAPIView(APIView):
 
 
 class TodoItemListCreateAPIView(generics.ListCreateAPIView):
-    queryset = TodoItem.objects.all()
     serializer_class = TodoItemSerializer
     authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticated]
 
+    def get_queryset(self):
+        return TodoItem.objects.filter(user=self.request.user)
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
 class TodoItemRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = TodoItem.objects.all()
     serializer_class = TodoItemSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return TodoItem.objects.filter(user=self.request.user)
