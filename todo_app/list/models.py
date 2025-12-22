@@ -15,5 +15,6 @@ class TodoItem(models.Model):
     completed = models.BooleanField(default=False)
     due_date = models.DateField(null=True, blank=True)
     due_time = models.TimeField(null=True, blank=True)
+    reminder_minutes = models.PositiveIntegerField(null=True, blank=True, help_text="Minutes before due time to remind")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
