@@ -1,3 +1,4 @@
+from django.core.mail import send_mail
 from celery import shared_task
 from django.utils import timezone
 from list.models import TodoItem
@@ -32,3 +33,6 @@ def send_todo_reminders():
             #if you want to send on email reminder uncomment the line below
             # send_reminder_email(todo)
             print(f"Reminder: Task '{todo.title}' is due at {due_datetime}.")
+
+def test_task():
+    print("Celery is working!")
