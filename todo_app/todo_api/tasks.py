@@ -34,5 +34,8 @@ def send_todo_reminders():
             # send_reminder_email(todo)
             print(f"Reminder: Task '{todo.title}' is due at {due_datetime}.")
 
+
+@shared_task
+
 def test_task():
     print("Celery is working!")
