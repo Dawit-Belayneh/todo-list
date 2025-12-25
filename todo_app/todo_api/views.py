@@ -6,8 +6,8 @@ from rest_framework.views import APIView
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAuthenticatedOrReadOnly
 from rest_framework.authentication import TokenAuthentication
-from .serializers import TodoItemSerializer, UserSerializer
-from list.models import TodoItem
+from .serializers import TodoItemSerializer, UserSerializer, CategorySerializer
+from list.models import Category, TodoItem
 from django.contrib.auth import get_user_model, authenticate
 
 # Create your views here.
@@ -70,3 +70,22 @@ class TodoItemRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView
 
     def get_queryset(self):
         return TodoItem.objects.filter(user=self.request.user)
+    
+class CategoryListCreateAPIView(generics.ListCreateAPIView):
+    serializer_class = CategorySerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Category.objects.filter(user=self.request.user)
+    
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
+
+class CategoryRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
+    serializer_class = CategorySerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return Category.objects.filter(user=self.request.user)

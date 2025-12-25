@@ -6,4 +6,6 @@ urlpatterns = [
     path('login/', views.LoginAPIView.as_view(), name='login'),
     path('todos/', views.TodoItemListCreateAPIView.as_view(), name='todoitem-list-create'),
     path('todos/<int:pk>/', views.TodoItemRetrieveUpdateDestroyAPIView.as_view(), name='todoitem-detail'),
+    path('categories/', views.CategoryListCreateAPIView.as_view(), name='category-list-create'),
+    path('categories/<int:pk>/', views.CategoryRetrieveUpdateDestroyAPIView.as_view(), name='category-detail'),
 ]
