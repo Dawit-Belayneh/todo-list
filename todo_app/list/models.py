@@ -8,6 +8,13 @@ class User(AbstractUser):
     pass
 
 class TodoItem(models.Model):
+    REPEAT_CHOICES = [
+        ('none', 'No Repeat'),
+        ('daily', 'Daily'),
+        ('weekly', 'Weekly'),
+        ('monthly', 'Monthly'),
+        ('yearly', 'Yearly'),
+    ]
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
 
     category = models.ForeignKey('Category', on_delete=models.SET_NULL, null=True, blank=True, related_name='todo_items')
@@ -18,6 +25,7 @@ class TodoItem(models.Model):
     due_date = models.DateField(null=True, blank=True)
     due_time = models.TimeField(null=True, blank=True)
     reminder_minutes = models.PositiveIntegerField(null=True, blank=True, help_text="Minutes before due time to remind")
+    repeat = models.CharField(max_length=10, choices=REPEAT_CHOICES, default='none')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

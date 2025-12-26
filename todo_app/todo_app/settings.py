@@ -38,11 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'todo_api',
-    'list',
     'rest_framework',
     'rest_framework.authtoken',
     'django_celery_beat',
     'django_filters',
+    'list.apps.ListConfig',
 ]
 
 MIDDLEWARE = [
