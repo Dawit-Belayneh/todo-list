@@ -9,6 +9,7 @@ from rest_framework.authentication import TokenAuthentication
 from .serializers import TodoItemSerializer, UserSerializer, CategorySerializer
 from list.models import Category, TodoItem
 from django.contrib.auth import get_user_model, authenticate
+from django_filters.rest_framework import DjangoFilterBackend
 
 # Create your views here.
 User = get_user_model()
@@ -56,8 +57,9 @@ class TodoItemListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = TodoItemSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
-    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
-    search_fields = ['title', 'description']
+    filter_backends = [DjangoFilterBackend, filters.SearchFilter, filters.OrderingFilter]
+    filterset_fields = ['completed', 'category']
+    search_fields = ['title', 'description', 'category__name']
     ordering_fields = ['due_date', 'created_at']
 
     def get_queryset(self):
