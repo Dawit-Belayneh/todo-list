@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from rest_framework import generics, status
+from rest_framework import generics, status, filters
 from rest_framework.response import Response
 from django.contrib.auth.hashers import make_password
 from rest_framework.views import APIView
@@ -56,6 +56,9 @@ class TodoItemListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = TodoItemSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['title', 'description']
+    ordering_fields = ['due_date', 'created_at']
 
     def get_queryset(self):
         return TodoItem.objects.filter(user=self.request.user)
@@ -75,6 +78,9 @@ class CategoryListCreateAPIView(generics.ListCreateAPIView):
     serializer_class = CategorySerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['name']
+    ordering_fields = ['name']
 
     def get_queryset(self):
         return Category.objects.filter(user=self.request.user)
