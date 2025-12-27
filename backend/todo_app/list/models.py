@@ -6,7 +6,7 @@ from django.contrib.auth.models import AbstractUser
 # Create your models here.
 class User(AbstractUser):
     pass
-
+# create a TodoItem model
 class TodoItem(models.Model):
     REPEAT_CHOICES = [
         ('none', 'No Repeat'),
