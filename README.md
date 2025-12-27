@@ -92,20 +92,25 @@ A powerful **Todo Application Backend** built with **Django REST Framework**, fe
 ### Install dependencies
 ```bash
 pip install celery redis django-celery-beat
-run
+```
+####Run Redis
+```bash
 redis-server
+```
+####Run migrations
+```bash
 python manage.py migrate
+```
+####celery run
+```bash
 celery -A todo_app worker -l info
-Future Improvements
+```
+###Future Improvements
 
 Email / push notifications
-
 Task priority levels
-
 Calendar view integration
-
 Shared tasks between users
-
 Production deployment (Docker, PostgreSQL)
-Integrate with frontend soon
+add frontend soon❤️
 
