@@ -107,10 +107,10 @@ celery -A todo_app worker -l info
 ```
 ###Future Improvements
 
-Email / push notifications
-Task priority levels
-Calendar view integration
-Shared tasks between users
-Production deployment (Docker, PostgreSQL)
-add frontend soon❤️
+-Email / push notifications
+-Task priority levels
+-Calendar view integration
+-Shared tasks between users
+-Production deployment (Docker, PostgreSQL)
+-Add frontend soon❤️
 
